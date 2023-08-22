@@ -23,6 +23,7 @@ export const options: NextAuthOptions = {
                 },
             },
             async authorize(credentials) {
+                console.log('>>> Authorization Attemp (Credentials): ', credentials)
                 // This is where you would retreive user data
                 // to verify credientials. (Ex: MongoDB User Table)
                 const user = {
