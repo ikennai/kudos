@@ -1,5 +1,3 @@
-'use client'
-
 export type ButtonVariants = 'primary' | 'default'
 
 export interface IButton {
@@ -8,27 +6,20 @@ export interface IButton {
     text: string
 }
 
+const buttonClasses = {
+    default: 'py-1 px-2 bg-black text-white text-sm rounded-lg hover:bg-black/80'
+}
+
 export default function Button(props: IButton) {
     // TODO: Handle children being inserted
-    const { 
+    const {
         action,
-        text, 
-        variant = 'default' 
+        text,
+        variant = 'default'
     } = props;
 
     // Methods
-    const getClasses = (variant: string) => {
-        let classString = ''
-
-        switch (variant) {
-            case 'primary':
-                break;
-            default:
-                classString = 'py-2 px-5 bg-gray-400 rounded-md'
-        }
-
-        return classString
-    }
+    const getClasses = (variant: string) => (buttonClasses[variant])
 
     return (
         <button
@@ -38,4 +29,23 @@ export default function Button(props: IButton) {
             {text}
         </button>
     )
+}
+
+/**
+ * Pass button type classes to the wrappepd component
+ * @param WrappedButton 
+ * @returns 
+ */
+export function withButton(WrappedButton: any) {
+    return (props: any) => {
+        const {
+            variant = 'default',
+            className,
+            ...rest
+        } = props;
+
+        console.log('>>> The rest: ', rest)
+
+        return <WrappedButton className={`${buttonClasses[variant]} ${className}`} {...rest} />
+    }
 }

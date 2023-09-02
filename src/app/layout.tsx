@@ -16,11 +16,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    // <SessionProvider session={session}>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-black`}>
+        <header className="bg-black text-white py-4">
+          <div className="max-w-screen-lg mx-auto">
+            <h1 className='text-2xl font-semibold'>Kudos App</h1>
+          </div>
+        </header>
+        <main className='flex-1 flex bg-slate-200'>
+          {children}
+        </main>
+        <footer className='bg-black text-center text-white flex min-h-[100px] items-center'>
+          <div className='max-w-screen-lg mx-auto'>
+            A Future Design Works App
+          </div>
+        </footer>
+      </body>
     </html>
-    // </SessionProvider>
-
   )
 }

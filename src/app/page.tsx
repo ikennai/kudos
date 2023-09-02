@@ -1,9 +1,9 @@
-'use client';
 
-import Image from 'next/image';
 import React, { useState } from 'react';
-import Button from '@/components/Button';
-import { useRouter } from 'next/navigation';
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server"
+import { withButton } from '@/components/Button';
+
+// import Login from '@/components/Login';
 
 export function FamilyName({ children }: { children: React.JSX.Element[] }) {
     const family = children.map((child) => {
@@ -22,38 +22,37 @@ export const Name = ({ name }: { name: string }) => {
 };
 
 // Higher Order Componeont
-const HOC = (WrappedComponent) => {
-    // Dont do thisi and mutate the original component
-    WrappedComponent = () => {};
+// const HOC = (WrappedComponent) => {
+//     // Dont do thisi and mutate the original component
+//     WrappedComponent = () => { };
 
-    return <></>;
-};
+//     return <></>;
+// };
 
-const withMousePosition = (WrappedComponent: React.Component) => {
-    return (props: any) => {
-        const [mousePosition, setMousePosition] = useState({
-            x: 0,
-            y: 0,
-        });
+// const withMousePosition = (WrappedComponent) => {
+//     return (props: any) => {
+//         const [mousePosition, setMousePosition] = useState({
+//             x: 0,
+//             y: 0,
+//         });
 
-        return <WrappedComponent {...props} />;
-    };
-};
+//         return <WrappedComponent {...props} />;
+//     };
+// };
 
-// Methods
-const handleSignup = () => {
-    router.push('/api/auth/signin');
-};
+const LoginLinkWithButton = withButton(LoginLink)
+const RegisterLinkWithButton = withButton(RegisterLink)
 
 export default function Home() {
-    const router = useRouter();
+    // const router = useRouter();
 
     // Methods
-    const handleSignup = () => {
-        router.push('/api/auth/signin');
-    };
+    // const handleSignup = () => {
+    //     router.push('/api/auth/signin');
+    // };
+
     return (
-        <main className="h-screen flex flex-col justify-center items-center">
+        <section className="flex flex-col w-full justify-center items-center">
             <h1>Kudoss App: Tailwind CSS is working</h1>
             <FamilyName>
                 <Name name="Ike" />
@@ -63,9 +62,18 @@ export default function Home() {
                 <Name name="Dubois" />
             </FamilyName>
 
-            <div>
+            {/* <div>
                 <Button action={handleSignup} text="Sign In" />
+            </div> */}
+
+            <div className="p-10 text-center">
+                <h2>Kinde Login</h2>
+                <div className="flex items-center justify-center gap-4 mt-6">
+                    <LoginLinkWithButton variant="default">Sign in</LoginLinkWithButton>
+                    <RegisterLinkWithButton>Sign up</RegisterLinkWithButton>
+                    {/* <LogoutLink>Log out</LogoutLink> */}
+                </div>
             </div>
-        </main>
+        </section>
     );
 }
